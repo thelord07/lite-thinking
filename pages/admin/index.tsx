@@ -8,7 +8,7 @@ const AdminPage = () => {
   const { user, isLoggedIn, logout } = useContext(AuthContext);
   return (
     <Layout>
-      {isLoggedIn && user?.role === 'admin' ? <UsersList/> : <UserData/> }
+      {isLoggedIn && user?.role === 'admin' ? <UsersList/> : <UserData /> }
       
         
     </Layout>

@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
-import NextLink from "next/link";
+import { GetServerSideProps } from 'next'
 import { useForm } from "react-hook-form";
+import { signIn, getSession, getProviders } from 'next-auth/react';
 
 import { AuthContext } from "../../context";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { validations } from "../../utils";
-import { liteApi } from "../../api";
 import { useRouter } from "next/router";
 
 type FormData = {
@@ -26,17 +26,7 @@ const LoginPage = () => {
 
   const onLoginUser = async ({ email, password }: FormData) => {
     setShowError(false);
-     
-    const isValidLogin = await loginUser(email, password);
-
-    if (!isValidLogin) {
-      setShowError(true);
-      setTimeout(() => setShowError(false), 3000);
-      return;
-    }
-
-    //Todo: navegar a la pantalla que el usuario estaba
-    router.replace("/admin");
+    await signIn('credentials',{ email, password });
   };
   return (
     <AuthLayout>
@@ -101,5 +91,25 @@ const LoginPage = () => {
     </AuthLayout>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+    
+  const session = await getSession({ req });
+  const { p = '/admin' } = query;
+
+  if ( session ) {
+      return {
+          redirect: {
+              destination: p.toString(),
+              permanent: false
+          }
+      }
+  }
+
+
+  return {
+      props: { }
+  }
+}
 
 export default LoginPage;

@@ -72,7 +72,7 @@ const UsersList = () => {
         </thead>
         <tbody className="divide-y divide-gray-200">
           {users?.map((user, index) => (
-            <tr>
+            <tr key={index}>
               <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                 {user._id}
               </td>
