@@ -3,7 +3,7 @@ import { liteApi } from "../../api";
 import { ICompany } from "../../interfaces/companies";
 import BtnSendEmail from "./BtnSendEmail";
 import jsPDF from "jspdf";
-import 'jspdf-autotable'
+import autoTable from 'jspdf-autotable'
 
 interface Props {
   company: ICompany;
@@ -26,7 +26,7 @@ const ListEntries = ({ company }: Props) => {
 
   const downloadData = () => {
     const pdf = new jsPDF();
-    pdf.autoTable({ html: "#table" });
+    autoTable(pdf, { html: "#table" });
     pdf.save("entries.pdf");
   };
 
@@ -42,16 +42,16 @@ const ListEntries = ({ company }: Props) => {
       <table id="table" className="w-full">
         <thead>
         <tr>
-            <th>id</th>
+            <th>#</th>
             <th>Descripcion</th>
             <th>Compañia</th>
             <th>Acciones</th>
         </tr>
         </thead>
           <tbody>
-            {companyEntries?.map((entry, index) => (
+            {companyEntries?.map((entry: any, index) => (
               <tr key={index}>
-                <th>{entry._id}</th>
+                <th>{index}</th>
                 <th>{entry?.description}</th>
                 <th>{entry?.companyId}</th>
                 <th>eliminar</th>

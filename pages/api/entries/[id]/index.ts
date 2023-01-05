@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '../../../../database';
-import { Entry, IEntry } from '../../../../models';
+import { Entry } from '../../../../models';
+import { IEntry } from '../../../../models/Entry';
 
 type Data = 
 | { message: string } 

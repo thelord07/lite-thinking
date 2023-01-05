@@ -4,7 +4,7 @@ interface SeedUser {
     name     : string;
     email    : string;
     password : string;
-    role     : 'admin'|'client'
+    role     : 'admin'|'guest'
 }
 
 interface SeedData {

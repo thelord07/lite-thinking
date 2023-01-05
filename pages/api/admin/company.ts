@@ -31,6 +31,8 @@ const getCompanyById = async (
   }
 
   const company = await Company.findOne({ _id: id });
+  console.log({company})
   await db.disconnect();
+  // @ts-ignore
   return res.status(200).json(company);
 };

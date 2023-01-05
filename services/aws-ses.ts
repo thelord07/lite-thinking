@@ -1,8 +1,8 @@
 import * as AWS from "aws-sdk";
 import * as nodemailer from "nodemailer";
 AWS.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.LITE_AWS_ACCESS_KEY,
+    secretAccessKey: process.env.LITE_AWS_SECRET_ACCESS_KEY,
     region: "us-east-2",
 });
 AWS.config.getCredentials(function (error) {
@@ -47,7 +47,7 @@ This is a test mail.
 return response?.messageId
 ? { ok: true }
 : { ok: false, msg: "Failed to send email" };
-} catch (error) {
+} catch (error: any) {
 console.log("ERROR", error.message);
 return { ok: false, msg: "Failed to send email" };
 }

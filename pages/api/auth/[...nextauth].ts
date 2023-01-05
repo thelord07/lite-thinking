@@ -1,3 +1,4 @@
+// @ts-nocheck
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from "next-auth/providers/credentials"
@@ -13,6 +14,7 @@ export default NextAuth({
         email: { label: 'Correo:', type: 'email', placeholder: 'correo@google.com'  },
         password: { label: 'Contraseña:', type: 'password', placeholder: 'Contraseña'  },
       },
+ 
       async authorize(credentials){
  
         return await dbUsers.checkUserEmailPassword( credentials!.email, credentials!.password );

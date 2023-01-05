@@ -6,38 +6,41 @@ import { ICompany } from "../../interfaces";
 import Company from "../../models/Company";
 import { liteApi } from "../../api";
 
+const columns = [
+  
+  {
+    name: "Nombre",
+    
+  },
+  {
+    name: "Nit",
+ 
+  },
+  {
+    name: "Direction",
+
+  },
+  {
+    name: "Teléfono",
+ 
+  },
+  {
+      name: "Usuario",
+  
+    },
+  {
+      name: "Acciones",
+  }
+];
+
 const CompaniesPage = () => {
   const { companies } = useContext(CompanyContext);
-  const columns = [
-  
-    {
-      name: "Nombre",
-      selector: (row) => row.name,
-    },
-    {
-      name: "Nit",
-      selector: (row) => row.nit,
-    },
-    {
-      name: "Direction",
-      selector: (row) => row.direction,
-    },
-    {
-      name: "Teléfono",
-      selector: (row) => row.phone,
-    },
-    {
-        name: "Usuario",
-        selector: (row) => row.user,
-      },
-    {
-        name: "Acciones",
-        ignoreRowClick: true,
-    allowOverflow: true,
-    button: true,
-        cell: (row) => <button className="bg-red-500 text-white px-5 py-1 rounded" onClick={() => handleButtonClick(row._id)}>Delete</button>,
-    }
-  ];
+
+  const [listCompanies, setListCompanies] = useState([])
+  useEffect(() => {
+    /* @ts-ignore */
+    setListCompanies(companies[0])
+  }, [companies])
 
   const handleButtonClick = async (id: string) => {
     const response = await liteApi({
@@ -59,13 +62,13 @@ const CompaniesPage = () => {
             ))}
           </thead>
           <tbody className="p-5">
-            {companies.length > 0 && companies[0].length > 0 && companies[0].map((row, index) => (
+            {listCompanies &&  listCompanies.map((row: any, index) => (
               <tr key={index}  >
-                <td>{row.name}</td>
-                <td>{row.nit}</td>
-                <td>{row.direction}</td>
-                <td>{row.phone}</td>
-                <td>{row.user}</td>
+                <td>{row?.name}</td>
+                <td>{row?.nit}</td>
+                <td>{row?.direction}</td>
+                <td>{row?.phone}</td>
+                <td>{row?.user}</td>
                 <td><button className="bg-red-500 text-white px-5 py-1 rounded" onClick={() => handleButtonClick(row._id)}>Delete</button></td>
               </tr>
             ))

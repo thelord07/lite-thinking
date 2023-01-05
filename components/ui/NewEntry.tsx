@@ -9,13 +9,13 @@ const NewEntry = () => {
   const router = useRouter()
 
   const { addNewEntry } = useContext(EntriesContext);
-  const onTextFieldChanged = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(event.target.value);
   };
   const onSave = () => {
     const {id} = router.query
     if (inputValue.length === 0) return;
-  
+   /* @ts-ignore */
     addNewEntry(inputValue, id);
     setTouched(false);
     setIsAddingEntry(false);

@@ -7,20 +7,25 @@ import ListEntries from "../../../../../components/ui/ListEntries";
 import NewEntry from "../../../../../components/ui/NewEntry";
 import { useRouter } from 'next/router';
 import Company from '../../../../../models/Company';
+import { NextPage } from "next";
 
-const EntriesPage = () => {
+const EntriesPage:NextPage = () => {
   const { companies } = useContext(CompanyContext);
   const router  = useRouter()
-  const [company, setCompany] = useState<ICompany>();
+  const [company, setCompany] = useState<any>();
+  const [listCompanies, setListCompanies] = useState([])
+  useEffect(() => {
+    /* @ts-ignore */
+    setListCompanies(companies[0])
+    findCompany()
+  }, [companies])
 
   const findCompany = async () => {
-    const find = await companies[0]?.find((company: ICompany) => company._id === router.query.id);
+    const find = await listCompanies?.find((company: ICompany) => company._id === router.query.id);
     setCompany(find)
   };
 
-  useEffect(() => {
-    findCompany()
-  }, [companies]);
+
 
   
 

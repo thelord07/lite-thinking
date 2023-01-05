@@ -1,10 +1,12 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { NextPage } from 'next';
 
 import Layout from "../../components/layouts/Layout";
-import { AuthContext } from "../../context";
+
 import liteApi from "../../api/liteApi";
 import { useRouter } from 'next/router';
+
 
 type FormData = {
   name: string;
@@ -13,8 +15,7 @@ type FormData = {
   phone: number;
 };
 
-const addCompanyPage = () => {
-  const { user } = useContext(AuthContext);
+const AddCompanyPage:NextPage = () => {
 const router = useRouter()
   const {
     register,
@@ -27,7 +28,7 @@ const router = useRouter()
 
   const onSaveCompany = async ({ name, direction, nit, phone }: FormData) => {
     setShowError(false);
-   const email = user?.email
+
     const saveCompany = await liteApi({
       url: "/admin/companies",
       method: "POST",
@@ -35,8 +36,7 @@ const router = useRouter()
         name,
         direction,
         nit,
-        phone,
-        email
+        phone
       },
     });
     if (saveCompany.status === 201) {
@@ -102,4 +102,4 @@ const router = useRouter()
   );
 };
 
-export default addCompanyPage;
+export default AddCompanyPage;

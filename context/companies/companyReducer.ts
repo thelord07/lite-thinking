@@ -4,7 +4,7 @@ import { ICompany } from "../../interfaces/companies";
 type CompanyActionType =
   | { type: "[Company] - Add-Company"; payload: ICompany }
   | { type: "[Company] - Update-Company"; payload: ICompany }
-  | { type: "[Company] - Refresh-Companies"; payload: ICompany[] };
+  | { type: "[Company] - Refresh-Companies"; payload: ICompany };
 
 export const CompanyReducer = (
   state: CompanyState,
@@ -32,7 +32,7 @@ export const CompanyReducer = (
       case "[Company] - Refresh-Companies":
         return {
             ...state,
-            companies:[ action.payload ] 
+            companies:[action.payload]
         }
     default:
       return state;

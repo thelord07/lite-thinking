@@ -19,7 +19,7 @@ const Company_INITIAL_STATE: CompanyState = {
 export const CompanyProvider = ({ children }: {children: ReactNode}) => {
 
     const [state, dispatch] = useReducer( CompanyReducer , Company_INITIAL_STATE );
-    /* const { enqueueSnackbar } = useSnackbar(); */
+ 
 
     const addNewCompany = async( company: ICompany ) => {
 
@@ -39,7 +39,7 @@ export const CompanyProvider = ({ children }: {children: ReactNode}) => {
     }
 
     const refreshCompanies = async() => {
-        const { data } = await liteApi.get<ICompany[]>('/admin/companies');
+        const { data } = await liteApi.get<ICompany>('/admin/companies');
         dispatch({ type: '[Company] - Refresh-Companies', payload: data });
     }
 

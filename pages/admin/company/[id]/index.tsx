@@ -2,10 +2,10 @@ import { useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import Layout from "../../../../components/layouts/Layout";
-import { AuthContext } from "../../../../context";
 import liteApi from "../../../../api/liteApi";
 import { useRouter } from "next/router";
 import { ICompany } from "../../../../interfaces";
+import { NextPage } from "next";
 
 type FormData = {
   name: string;
@@ -14,8 +14,8 @@ type FormData = {
   phone: number;
 };
 
-const editCompanyPage = () => {
-  const { user } = useContext(AuthContext);
+const EditCompanyPage:NextPage = () => {
+
   const router = useRouter();
 
 
@@ -28,7 +28,7 @@ const editCompanyPage = () => {
   } = useForm<FormData>();
   const [showError, setShowError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-  const [company, setCompany] = useState<ICompany>();
+  const [company, setCompany] = useState<any>();
 
   const onSaveCompany = async ({ name, direction, nit, phone }: FormData) => {
     setShowError(false);
@@ -132,4 +132,4 @@ const editCompanyPage = () => {
   );
 };
 
-export default editCompanyPage;
+export default EditCompanyPage;
